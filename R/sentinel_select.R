@@ -22,7 +22,8 @@ sentinel_query<-function(start_date,
          platform,
          product,
          id,
-         cloud_percentage){
+         cloud_percentage,
+         tile_id = NULL){
 
 #login in SciHub
 getSpatialData::login_CopHub(username=login, password = pw)
@@ -94,8 +95,16 @@ if (product=='L2Ap'&id=='S2B'){
 }
 
 
+#section to filter based on tile name
 
+if (is.null(tile_id) == FALSE){
+  #records_filtered<-records_filtered[records_filtered$filename %data.table::like% tile_id ,]
 
+  records_filtered<-records_filtered[grep(tile_id ,records_filtered$filename),]
+
+  #iris[grep("osa", iris$Species), ]
+
+}
 
 #print(records_filtered)
 return(records_filtered)

@@ -29,7 +29,8 @@ sentinel_low_tide_select<-function(start_date,
                                    time_window,
                                    country,
                                    site_id,
-                                   cloud_percentage)
+                                   cloud_percentage,
+                                   tile_id = NULL)
   {
 
 #1 - select date, select aoi, product, download path, platform, download option
@@ -37,7 +38,8 @@ sentinel_low_tide_select<-function(start_date,
 image_list<-sentinel_query(start_date = start_date,end_date = end_date,
                  aoi=aoi, download_path = download_path,
                  login=login,pw=pw,platform = platform,
-                 product = product,id=id,cloud_percentage = cloud_percentage)
+                 product = product,id=id,cloud_percentage = cloud_percentage,
+                 tile_id = tile_id)
 
 #2 - test if the images fit low tide times within a time window
 #creates a list of images that fit within the specified low tide period

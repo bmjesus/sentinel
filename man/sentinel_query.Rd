@@ -5,7 +5,7 @@
 \title{Function to query Sentinel Copernicus to check for available images}
 \usage{
 sentinel_query(start_date, end_date, aoi, download_path = "./", login,
-  pw, platform, product, id, cloud_percentage)
+  pw, platform, product, id, cloud_percentage, tile_id = NULL)
 }
 \arguments{
 \item{start_date}{intial date in the format yyyy-mm-dd (e.g. 2018-01-01)}

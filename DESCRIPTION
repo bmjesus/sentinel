@@ -13,7 +13,8 @@ Depends:
 Imports:
     rvest,
     getSpatialData,
-    xml2
+    xml2,
+    data.table
 Collate:
     'sentinel_select.R'
     'compare_tidal_times.R'

@@ -6,7 +6,7 @@
 \usage{
 sentinel_low_tide_select(start_date, end_date, aoi, download = FALSE,
   download_path, login, pw, platform, product, id, time_window, country,
-  site_id, cloud_percentage)
+  site_id, cloud_percentage, tile_id = NULL)
 }
 \arguments{
 \item{start_date}{intial date in the format yyyy-mm-dd (e.g. 2018-01-01)}
