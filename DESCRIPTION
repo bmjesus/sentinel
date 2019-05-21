@@ -1,0 +1,27 @@
+Package: sentinel
+Type: Package
+Title: Selects and downloads Sentinel images that coincide with low tide periods 
+Version: 0.1.0
+Author: Bruno Jesus
+Maintainer: Bruno Jesus <bmjesus@gmail.com>
+Description: Selects and downloads Sentinel images that coincide with low tide periods. Currently only works in France and using the site  http://maree.info
+License: GPL-3
+Encoding: UTF-8
+LazyData: true
+Depends:
+    R (>= 2.9)
+Imports:
+    rvest,
+    getSpatialData,
+    xml2
+Collate:
+    'sentinel_select.R'
+    'compare_tidal_times.R'
+    'sentinel_low_tide_select.R'
+    'tidal_times_fr.R'
+    'ndvi_sentinel.R'
+    'ndwi_sentinel.R'
+    'tidal_times_ca.R'
+    'tidal_times_all.R'
+    'tidal_tables.R'
+RoxygenNote: 6.1.1
