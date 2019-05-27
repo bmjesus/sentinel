@@ -10,7 +10,7 @@
 #' @param platform Choice of Satellite (Sentinel-1, Sentinel-2, Sentinel-3)
 #' @param product Choice of product type (L1C, L2Ap and L2A available)
 #' @param id code to select both satellites (S2), only satellite A (S2A) and only satellite B (S2B)
-#' @param cloud_percentage parameter to exclude images that have less than the percentage of clouds defined in this parameter
+#' @param cloud_percentage parameter to exclude images that have less than the percentage of clouds defined in this parameter. Only works in L2 products.
 #' @return A dataframe with the list of files avilable for potential download
 #' @export
 sentinel_query<-function(start_date,
@@ -45,10 +45,6 @@ print(time_window)
 #returning the results
 records<-getSpatialData::getSentinel_query(time_range = time_window, platform = platform)
 
-#filtering the data using the cloud cover percentage
-records$highprobacloudspercentage<-as.numeric(records$highprobacloudspercentage)
-
-records <- records[which(records$highprobacloudspercentage <= cloud_percentage),]
 
 #print(records)
 #filtering by product type
@@ -95,16 +91,22 @@ if (product=='L2Ap'&id=='S2B'){
 }
 
 
-#section to filter based on tile name
-
-if (is.null(tile_id) == FALSE){
-  #records_filtered<-records_filtered[records_filtered$filename %data.table::like% tile_id ,]
-
-  records_filtered<-records_filtered[grep(tile_id ,records_filtered$filename),]
-
-  #iris[grep("osa", iris$Species), ]
-
+##################
+#filtering the data using the cloud cover percentage
+if(product!='L1C'){
+  records$highprobacloudspercentage<-as.numeric(records$highprobacloudspercentage)
+  records <- records[which(records$highprobacloudspercentage <= cloud_percentage),]
 }
+
+##################
+
+##################
+#section to filter based on tile name
+if (is.null(tile_id) == FALSE){
+  records_filtered<-records_filtered[grep(tile_id ,records_filtered$filename),]
+}
+##################
+
 
 #print(records_filtered)
 return(records_filtered)
