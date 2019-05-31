@@ -44,8 +44,21 @@ code_timezone<-unique(p1$V5)
 
 #print(code_timezone)
 
-formatted.time <- strptime(var_temp, format="%Y-%m-%d %I:%M %p",
-                           tz='UTC')
+#AM/PM format causes some problems in non-english systems so in these
+#I removed the %p option and it works in most situations
+
+my_locale<-Sys.getlocale(category = "LC_ALL")
+my_locale<-substr(my_locale,1,11)
+
+#print(my_locale)
+
+if(my_locale=="fr_FR.UTF-8"){
+  formatted.time <- strptime(var_temp, format="%Y-%m-%d %I:%M",tz='UTC')
+}else{
+  formatted.time <- strptime(var_temp, format="%Y-%m-%d %I:%M %p",
+                             tz='UTC')
+}
+
 #print(formatted.time)
 
 #converting to UTC depending on the time zone code written on the website
