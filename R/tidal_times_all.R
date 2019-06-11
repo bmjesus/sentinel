@@ -53,7 +53,7 @@ my_locale<-substr(my_locale,1,11)
 #print(my_locale)
 
 if(my_locale=="fr_FR.UTF-8"){
-  formatted.time <- strptime(var_temp, format="%Y-%m-%d %I:%M",tz='UTC')
+  formatted.time <- strptime(var_temp, format="%Y-%m-%d %I:%M %p",tz='UTC')
 }else{
   formatted.time <- strptime(var_temp, format="%Y-%m-%d %I:%M %p",
                              tz='UTC')
