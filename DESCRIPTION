@@ -14,7 +14,8 @@ Imports:
     rvest,
     getSpatialData,
     xml2,
-    data.table
+    data.table,
+    lubridate
 Collate:
     'sentinel_select.R'
     'compare_tidal_times.R'
