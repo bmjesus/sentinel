@@ -8,7 +8,10 @@
 #' @return a list with the tidal info and an element TRUE/FALSE if it fits the selection criteria (time_window)
 #' @export
 
-compare_times<-function(sat_info,time_window,country='fr',site_id=NULL){
+compare_times<-function(sat_info,
+                        time_window,
+                        country='fr',
+                        site_id=NULL){
 
 #convert time window to seconds
 #time_window<-time_window*60
@@ -42,7 +45,7 @@ if (country=='fr'){
   tide_info_df<-tide_info_fr(t1,site_id)
 }
 if (country=='ca'){
-  tide_info_df<-tide_info_ca(t1)
+  tide_info_df<-tide_info_ca(t1,site_id)
 }
 
 if (country=='all'){

@@ -51,7 +51,7 @@ ndwi_sentinel<-function(image_folder,clip_layer = NaN,export = FALSE){
       output_name <- paste('ndwi', output_name,'.tif',sep='')
 
       #export the image to the working directory
-      writeRaster(ndwi, filename = output_name,
+      raster::writeRaster(ndwi, filename = output_name,
                   datatype="FLT4S",
                   options=c("compress=lzw"),
                   overwrite=T)

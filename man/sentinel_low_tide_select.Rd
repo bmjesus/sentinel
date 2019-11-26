@@ -36,6 +36,8 @@ sentinel_low_tide_select(start_date, end_date, aoi, download = FALSE,
 \item{site_id}{numerical code to the tidal station, e.g. 114 for Le Croisic}
 
 \item{cloud_percentage}{parameter to exclude images that have less than the percentage of clouds defined in this parameter}
+
+\item{tile_id}{to select the tile code if needed}
 }
 \value{
 a dataframe listing all the images that are available and/or downloaded

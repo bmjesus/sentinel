@@ -27,6 +27,8 @@ sentinel_query(start_date, end_date, aoi, download_path = "./", login,
 \item{id}{code to select both satellites (S2), only satellite A (S2A) and only satellite B (S2B)}
 
 \item{cloud_percentage}{parameter to exclude images that have less than the percentage of clouds defined in this parameter. Only works in L2 products.}
+
+\item{tile_id}{to select the tile code if needed}
 }
 \value{
 A dataframe with the list of files avilable for potential download

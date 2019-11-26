@@ -26,4 +26,6 @@ Collate:
     'tidal_times_ca.R'
     'tidal_times_all.R'
     'tidal_tables.R'
+    'model_tidal_heights.R'
+    'tidal_height.R'
 RoxygenNote: 6.1.1

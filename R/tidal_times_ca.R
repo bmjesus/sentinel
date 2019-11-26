@@ -3,10 +3,11 @@
 #' currently configured to read tides from Hopewell Cape (#170).
 #' Uses the package rvest for the html parsing.
 #' @param tide_date date in the format yyyymmdd (e.g. 20181201)
+#' @param site_id code for the tidal site
 #' @return a dataframe with the tide times corrected to UTC, the tidal height and
 #' if they correspond to high tide (PM) or low tide (BM)
 #' @export
-tide_info_ca<-function(tide_date){
+tide_info_ca<-function(tide_date,site_id = 5855){
 
 #tide_date<-20190104
 
@@ -16,11 +17,13 @@ tide_info_ca<-function(tide_date){
 library('rvest')
 #tide_date<-"20181201"
 
-year<-substr(tide_date,1,4)
-month<-substr(tide_date,5,6)
-day<-substr(tide_date,7,8)
+  year<-substr(tide_date,1,4)
+  month<-substr(tide_date,6,7)
+  day<-substr(tide_date,9,10)
 
-url<-paste('http://www.waterlevels.gc.ca/eng/station?type=0&date=',year,'%2F',month,'%2F',day,'&sid=170&tz=UTC&pres=1',sep='')
+  tide_date<-paste(year,month,day,sep='')
+
+url<-paste('http://www.waterlevels.gc.ca/eng/station?type=0&date=',year,'%2F',month,'%2F',day,'&sid=',site_id,'&tz=UTC&pres=1',sep='')
 
 webpage <- read_html(url)
 

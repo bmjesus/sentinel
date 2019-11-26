@@ -4,10 +4,12 @@
 \alias{tide_info_ca}
 \title{Function read and parse tidal times from the site http://www.waterlevels.gc.ca}
 \usage{
-tide_info_ca(tide_date)
+tide_info_ca(tide_date, site_id = 5855)
 }
 \arguments{
 \item{tide_date}{date in the format yyyymmdd (e.g. 20181201)}
+
+\item{site_id}{code for the tidal site}
 }
 \value{
 a dataframe with the tide times corrected to UTC, the tidal height and

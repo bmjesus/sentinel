@@ -11,6 +11,7 @@
 #' @param product Choice of product type (L1C, L2Ap and L2A available)
 #' @param id code to select both satellites (S2), only satellite A (S2A) and only satellite B (S2B)
 #' @param cloud_percentage parameter to exclude images that have less than the percentage of clouds defined in this parameter. Only works in L2 products.
+#'@param tile_id to select the tile code if needed
 #' @return A dataframe with the list of files avilable for potential download
 #' @export
 sentinel_query<-function(start_date,

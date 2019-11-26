@@ -50,7 +50,7 @@ ndvi_sentinel<-function(image_folder,clip_layer = NaN,export = FALSE){
       output_name <- paste('ndvi', output_name,'.tif',sep='')
 
       #export the image to the working directory
-      writeRaster(ndvi, filename = output_name,
+      raster::writeRaster(ndvi, filename = output_name,
                   datatype="FLT4S",
                   options=c("compress=lzw"),
                   overwrite=T)

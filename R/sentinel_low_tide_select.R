@@ -14,6 +14,7 @@
 #' @param country code to select tidal tables from a particular country, fr for France and all for all other countries
 #' @param site_id numerical code to the tidal station, e.g. 114 for Le Croisic
 #' @param cloud_percentage parameter to exclude images that have less than the percentage of clouds defined in this parameter
+#' @param tile_id to select the tile code if needed
 #' @return a dataframe listing all the images that are available and/or downloaded
 #' @export
 sentinel_low_tide_select<-function(start_date,
@@ -40,6 +41,7 @@ image_list<-sentinel_query(start_date = start_date,end_date = end_date,
                  login=login,pw=pw,platform = platform,
                  product = product,id=id,cloud_percentage = cloud_percentage,
                  tile_id = tile_id)
+#print(image_list)
 
 #2 - test if the images fit low tide times within a time window
 #creates a list of images that fit within the specified low tide period
