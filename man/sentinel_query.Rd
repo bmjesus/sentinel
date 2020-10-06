@@ -4,8 +4,19 @@
 \alias{sentinel_query}
 \title{Function to query Sentinel Copernicus to check for available images}
 \usage{
-sentinel_query(start_date, end_date, aoi, download_path = "./", login,
-  pw, platform, product, id, cloud_percentage, tile_id = NULL)
+sentinel_query(
+  start_date,
+  end_date,
+  aoi,
+  download_path = "./",
+  login,
+  pw,
+  platform,
+  product,
+  sensor_id,
+  cloud_percentage,
+  tile_id = NULL
+)
 }
 \arguments{
 \item{start_date}{intial date in the format yyyy-mm-dd (e.g. 2018-01-01)}
@@ -24,7 +35,7 @@ sentinel_query(start_date, end_date, aoi, download_path = "./", login,
 
 \item{product}{Choice of product type (L1C, L2Ap and L2A available)}
 
-\item{id}{code to select both satellites (S2), only satellite A (S2A) and only satellite B (S2B)}
+\item{sensor_id}{code to select both satellites (S2), only satellite A (S2A) and only satellite B (S2B)}
 
 \item{cloud_percentage}{parameter to exclude images that have less than the percentage of clouds defined in this parameter. Only works in L2 products.}
 

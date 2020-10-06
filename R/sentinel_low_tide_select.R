@@ -10,7 +10,7 @@
 #' @param platform Choice of Satellite (Sentinel-1, Sentinel-2, Sentinel-3)
 #' @param product Choice of product type (L1C, L2Ap and L2A available)
 #' @param time_window Time window (in hours) around low tide for selecting an image
-#' @param id code to select both satellites (S2), only satellite A (S2A) and only satellite B (S2B)
+#' @param sensor_id code to select both satellites (S2), only satellite A (S2A) and only satellite B (S2B)
 #' @param country code to select tidal tables from a particular country, fr for France and all for all other countries
 #' @param site_id numerical code to the tidal station, e.g. 114 for Le Croisic
 #' @param cloud_percentage parameter to exclude images that have less than the percentage of clouds defined in this parameter
@@ -26,7 +26,7 @@ sentinel_low_tide_select<-function(start_date,
                                    pw,
                                    platform,
                                    product,
-                                   id,
+                                   sensor_id,
                                    time_window,
                                    country,
                                    site_id,
@@ -39,20 +39,26 @@ sentinel_low_tide_select<-function(start_date,
 image_list<-sentinel_query(start_date = start_date,end_date = end_date,
                  aoi=aoi, download_path = download_path,
                  login=login,pw=pw,platform = platform,
-                 product = product,id=id,cloud_percentage = cloud_percentage,
+                 product = product,sensor_id=sensor_id,cloud_percentage = cloud_percentage,
                  tile_id = tile_id)
 #print(image_list)
+
+#print(image_list$record_id[1])
+
+
 
 #2 - test if the images fit low tide times within a time window
 #creates a list of images that fit within the specified low tide period
   list_download<-data.frame()
-  for (i in 1:length(image_list$title)){
-    result_comparison<-compare_times(sat_info=image_list$title[i],time_window,country = country, site_id=site_id)
+  for (i in 1:length(image_list$record_id)){
+    result_comparison<-compare_times(sat_info=image_list$record_id[i],time_window,country = country, site_id=site_id)
     if (result_comparison[[3]]==TRUE){
-      print(image_list$title[i])
+      print(image_list$record_id[i])
       list_download<-rbind(list_download,image_list[i,])
     }
   }
+
+#print(list_download)
 
 #3- donwload images if selected
 dir_out<-download_path

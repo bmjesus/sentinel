@@ -28,4 +28,4 @@ Collate:
     'tidal_tables.R'
     'model_tidal_heights.R'
     'tidal_height.R'
-RoxygenNote: 6.1.1
+RoxygenNote: 7.1.1

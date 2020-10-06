@@ -9,7 +9,7 @@
 #' @param pw password for the Copernicus SciHub account
 #' @param platform Choice of Satellite (Sentinel-1, Sentinel-2, Sentinel-3)
 #' @param product Choice of product type (L1C, L2Ap and L2A available)
-#' @param id code to select both satellites (S2), only satellite A (S2A) and only satellite B (S2B)
+#' @param sensor_id code to select both satellites (S2), only satellite A (S2A) and only satellite B (S2B)
 #' @param cloud_percentage parameter to exclude images that have less than the percentage of clouds defined in this parameter. Only works in L2 products.
 #'@param tile_id to select the tile code if needed
 #' @return A dataframe with the list of files avilable for potential download
@@ -22,7 +22,7 @@ sentinel_query<-function(start_date,
          pw,
          platform,
          product,
-         id,
+         sensor_id,
          cloud_percentage,
          tile_id = NULL){
 
@@ -44,67 +44,84 @@ time_window <- c(start_date, end_date)
 print(time_window)
 
 #returning the results
-records<-getSpatialData::getSentinel_query(time_range = time_window, platform = platform)
+
+#the getSpatialData::getSentinel_query was deprecated
+#records<-getSpatialData::getSentinel_query(time_range = time_window, platform = platform)
+
+#trying getSentinel_records instead
+records<-getSpatialData::getSentinel_records(time_range = time_window, platform = platform)
+
+#print("I'm here")
+#print(str(as.data.frame(records)))
+
+records<-as.data.frame(records)
+#print("I'm here now")
+#print(records$level )
 
 
 #print(records)
 #filtering by product type
-if (product=='L1C'&id=='S2'){
-  records_filtered <- records[which(records$processinglevel == "Level-1C"),]
+if (product=='L1C'& sensor_id=='S2'){
+  records_filtered <- records[which(records$level == "Level-1C"),]
 }
 
-if (product=='L1C'&id=='S2A'){
-  records_filtered <- records[which(records$processinglevel == "Level-1C"&records$platformserialidentifier =='Sentinel-2A'),]
+if (product=='L1C'&sensor_id=='S2A'){
+  records_filtered <- records[which(records$level == "Level-1C"&records$platformserialidentifier =='Sentinel-2A'),]
 }
 
-if (product=='L1C'&id=='S2B'){
-  records_filtered <- records[which(records$processinglevel == "Level-1C"&records$platformserialidentifier =='Sentinel-2B'),]
-}
-
-
-if (product=='L2A'&id=='S2'){
-  records_filtered <- records[which(records$processinglevel == "Level-2A"),]
+if (product=='L1C'&sensor_id=='S2B'){
+  records_filtered <- records[which(records$level == "Level-1C"&records$platformserialidentifier =='Sentinel-2B'),]
 }
 
 
-if (product=='L2A'&id=='S2A'){
-  records_filtered <- records[which(records$processinglevel == "Level-2A"&records$platformserialidentifier =='Sentinel-2A'),]
+if (product=='L2A'&sensor_id=='S2'){
+  records_filtered <- records[which(records$level == "Level-2A"),]
 }
 
 
-if (product=='L2A'&id=='S2B'){
-  records_filtered <- records[which(records$processinglevel == "Level-2A"&records$platformserialidentifier =='Sentinel-2B'),]
+if (product=='L2A'&sensor_id=='S2A'){
+  records_filtered <- records[which(records$level == "Level-2A"&records$platformserialidentifier =='Sentinel-2A'),]
 }
 
 
-if (product=='L2Ap'&id=='S2'){
-  records_filtered <- records[which(records$processinglevel == "Level-2Ap"),]
+if (product=='L2A'&sensor_id=='S2B'){
+  records_filtered <- records[which(records$level == "Level-2A"&records$platformserialidentifier =='Sentinel-2B'),]
 }
 
 
-if (product=='L2Ap'&id=='S2A'){
-  records_filtered <- records[which(records$processinglevel == "Level-2Ap"&records$platformserialidentifier =='Sentinel-2A'),]
+if (product=='L2Ap'&sensor_id=='S2'){
+  records_filtered <- records[which(records$level == "Level-2Ap"),]
 }
 
 
-if (product=='L2Ap'&id=='S2B'){
-  records_filtered <- records[which(records$processinglevel == "Level-2Ap"&records$platformserialidentifier =='Sentinel-2B'),]
+if (product=='L2Ap'&sensor_id=='S2A'){
+  records_filtered <- records[which(records$level == "Level-2Ap"&records$platformserialidentifier =='Sentinel-2A'),]
 }
+
+
+if (product=='L2Ap'&sensor_id=='S2B'){
+  records_filtered <- records[which(records$level == "Level-2Ap"&records$platformserialidentifier =='Sentinel-2B'),]
+}
+
+#print("I'm here now - II")
+
 
 
 ##################
 #filtering the data using the cloud cover percentage
 if(product!='L1C'){
-  records$highprobacloudspercentage<-as.numeric(records$highprobacloudspercentage)
-  records <- records[which(records$highprobacloudspercentage <= cloud_percentage),]
+  records$cloudcov<-as.numeric(records$cloudcov)
+  records_filtered <- records_filtered[which(records_filtered$cloudcov <= cloud_percentage),]
 }
 
 ##################
 
+#print("I'm here now - III")
+#print(records_filtered )
 ##################
 #section to filter based on tile name
 if (is.null(tile_id) == FALSE){
-  records_filtered<-records_filtered[grep(tile_id ,records_filtered$filename),]
+  records_filtered<-records_filtered[grep(tile_id ,records_filtered$record_id),]
 }
 ##################
 

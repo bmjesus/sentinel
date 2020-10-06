@@ -4,9 +4,23 @@
 \alias{sentinel_low_tide_select}
 \title{Select sentinel images that correspond to low tide periods and downloads it if required by the user}
 \usage{
-sentinel_low_tide_select(start_date, end_date, aoi, download = FALSE,
-  download_path, login, pw, platform, product, id, time_window, country,
-  site_id, cloud_percentage, tile_id = NULL)
+sentinel_low_tide_select(
+  start_date,
+  end_date,
+  aoi,
+  download = FALSE,
+  download_path,
+  login,
+  pw,
+  platform,
+  product,
+  sensor_id,
+  time_window,
+  country,
+  site_id,
+  cloud_percentage,
+  tile_id = NULL
+)
 }
 \arguments{
 \item{start_date}{intial date in the format yyyy-mm-dd (e.g. 2018-01-01)}
@@ -27,7 +41,7 @@ sentinel_low_tide_select(start_date, end_date, aoi, download = FALSE,
 
 \item{product}{Choice of product type (L1C, L2Ap and L2A available)}
 
-\item{id}{code to select both satellites (S2), only satellite A (S2A) and only satellite B (S2B)}
+\item{sensor_id}{code to select both satellites (S2), only satellite A (S2A) and only satellite B (S2B)}
 
 \item{time_window}{Time window (in hours) around low tide for selecting an image}
 

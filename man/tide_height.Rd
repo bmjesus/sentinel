@@ -4,8 +4,7 @@
 \alias{tide_height}
 \title{Function to predict the tidal height}
 \usage{
-tide_height(start_date, end_date, location = "all", site_id,
-  user_time = NULL)
+tide_height(start_date, end_date, location = "all", site_id, user_time = NULL)
 }
 \arguments{
 \item{start_date}{date in the format "yyyy-mm-dd" (e.g. "2018-12-01")}
